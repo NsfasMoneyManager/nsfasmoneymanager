@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <meta name="theme-color" content="#0A4DA2">
+    <title>Create account — NSFAS Money Manager</title>
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+<div class="auth-page">
+    <div class="auth-layout">
+        <div class="auth-illustration">
+            <h2>Start your <span>financial journey</span> today.</h2>
+            <p>Create your free account and take control of your NSFAS allowance. No hidden costs, no fake numbers — just your real money, tracked properly.</p>
+            <ul class="auth-feature-list">
+                <li><i class="fas fa-check"></i> Starts at R0.00 — no automatic money</li>
+                <li><i class="fas fa-check"></i> Add real income and expenses</li>
+                <li><i class="fas fa-check"></i> Your data stays on your device</li>
+            </ul>
+            <div class="auth-image" id="signupImageContainer" aria-hidden="true"></div>
+        </div>
+
+        <div class="auth-box">
+            <div class="auth-logo">
+                <div class="logo-icon"><img src="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg" alt="NSFAS Money Manager"></div>
+                <h1>NSFAS Money Manager</h1>
+                <p>Smart student finance</p>
+            </div>
+            <h2>Create account</h2>
+            <p class="auth-subtitle">Start managing your NSFAS allowance today</p>
+
+            <div class="msg msg-error" id="registerError" role="alert"></div>
+            <div class="msg msg-success" id="registerSuccess" role="status"></div>
+
+            <form id="registerForm" novalidate>
+                <div class="input-group">
+                    <label for="regFirstName">First name</label>
+                    <input type="text" id="regFirstName" placeholder="Enter your first name" required>
+                </div>
+                <div class="input-group">
+                    <label for="regLastName">Last name</label>
+                    <input type="text" id="regLastName" placeholder="Enter your last name" required>
+                </div>
+                <div class="input-group">
+                    <label for="regStudentNumber">Student number</label>
+                    <input type="text" id="regStudentNumber" placeholder="e.g. 203067667" required>
+                </div>
+                <div class="input-group">
+                    <label for="regEmail">Email address</label>
+                    <input type="email" id="regEmail" placeholder="student@university.ac.za" required>
+                </div>
+                <div class="input-group">
+                    <label for="regPhone">Phone number</label>
+                    <input type="tel" id="regPhone" placeholder="e.g. 0765532555" required>
+                </div>
+                <div class="input-group">
+                    <label for="regUniversity">University / institution</label>
+                    <input type="text" id="regUniversity" placeholder="Enter your university name">
+                </div>
+                <div class="input-group">
+                    <label for="regCourse">Course / program</label>
+                    <input type="text" id="regCourse" placeholder="e.g. BSc Computer Science">
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Password (min 8 characters)</label>
+                    <input type="password" id="regPassword" placeholder="Create a password" required>
+                </div>
+                <div class="input-group">
+                    <label for="regConfirmPassword">Confirm password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="auth-btn" id="registerSubmitBtn">
+                    <i class="fas fa-user-plus"></i> Create account
+                </button>
+            </form>
+
+            <div class="auth-switch">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+            <div class="auth-trust">
+                <i class="fas fa-shield-alt"></i> Your account starts at R0.00 — no automatic money.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="register.js"></script>
+</body>
+</html>
