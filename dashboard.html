@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, viewport-fit=cover">
+    <meta name="theme-color" content="#0A4DA2">
+    <title>Dashboard — NSFAS Money Manager</title>
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="app-content active">
+    <nav class="app-navbar">
+        <div class="container">
+            <a href="#" class="brand" onclick="navigateTo('dashboard'); return false;">
+                <div class="logo-icon"><img src="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg" alt="NSFAS"></div>
+                <h1>NSFAS<span>Money</span></h1>
+            </a>
+            <div class="app-navlinks" id="appNavLinks">
+                <a href="#" class="active" data-page="dashboard"><i class="fas fa-home"></i> Home</a>
+                <a href="#" data-page="wallet"><i class="fas fa-wallet"></i> Wallet</a>
+                <a href="#" data-page="expenses"><i class="fas fa-receipt"></i> Expenses</a>
+                <a href="#" data-page="budget"><i class="fas fa-chart-pie"></i> Budget</a>
+                <a href="#" data-page="goals"><i class="fas fa-bullseye"></i> Goals</a>
+                <a href="#" data-page="analytics"><i class="fas fa-chart-line"></i> Analytics</a>
+                <a href="#" data-page="reports"><i class="fas fa-file-alt"></i> Reports</a>
+                <a href="#" data-page="profile"><i class="fas fa-user"></i> Profile</a>
+            </div>
+            <div class="nav-actions">
+                <button class="icon-btn" onclick="showNotifications()"><i class="fas fa-bell"></i><span class="badge-count" id="notifCount" style="display:none;">0</span></button>
+                <button class="avatar-btn" id="navbarAvatar" onclick="navigateTo('profile')">S</button>
+                <button class="icon-btn" onclick="handleLogout()" title="Log out"><i class="fas fa-sign-out-alt"></i></button>
+                <button class="hamburger" onclick="toggleAppMenu()"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- DASHBOARD -->
+        <div class="page-section active" id="page-dashboard">
+            <div class="page-header"><h2>Welcome back, <span id="dashUserName">Student</span></h2><p>Here's your financial overview.</p></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-wallet"></i></div><div class="stat-label">Current balance</div><div class="stat-value" id="dashBalance">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fas fa-arrow-up"></i></div><div class="stat-label">Total income</div><div class="stat-value" id="dashAllowance">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon red"><i class="fas fa-arrow-down"></i></div><div class="stat-label">Total expenses</div><div class="stat-value" id="dashExpenses">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-piggy-bank"></i></div><div class="stat-label">Savings</div><div class="stat-value" id="dashSavings">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-heartbeat"></i></div><div class="stat-label">Financial health</div><div class="stat-value" id="dashHealth">—</div></div>
+            </div>
+            <div class="ai-coach-card">
+                <div class="coach-head"><strong><i class="fas fa-brain"></i> AI Budget Coach</strong><span class="badge badge-info">Based on your data</span></div>
+                <div class="coach-message" id="coachMessage">Add some income and expenses to start analysing your finances.</div>
+                <div class="coach-tip" id="coachTip">Tip: Once you log a few transactions, you'll get personalised advice.</div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn btn-primary" onclick="openAddMoneyModal()"><i class="fas fa-plus"></i> Add money</button>
+                <button class="btn btn-secondary" onclick="openModal('addExpenseModal')"><i class="fas fa-plus"></i> Add expense</button>
+                <button class="btn btn-outline" onclick="navigateTo('budget')"><i class="fas fa-wallet"></i> Set budget</button>
+                <button class="btn btn-outline" onclick="navigateTo('goals')"><i class="fas fa-bullseye"></i> New goal</button>
+                <button class="btn btn-ghost" onclick="generateReport('pdf')"><i class="fas fa-download"></i> Report</button>
+            </div>
+            <div class="grid-2" style="margin-bottom:24px;">
+                <div class="chart-card"><h4><i class="fas fa-chart-bar" style="color:var(--primary-blue);"></i> Monthly spending</h4><canvas id="dashBarChart"></canvas></div>
+                <div class="chart-card"><h4><i class="fas fa-chart-pie" style="color:var(--primary-green);"></i> Expense distribution</h4><canvas id="dashPieChart"></canvas></div>
+            </div>
+            <div class="transaction-list">
+                <div class="flex-between" style="margin-bottom:16px;">
+                    <h4 style="font-family:var(--font-primary);font-size:0.95rem;">Recent transactions</h4>
+                    <a href="#" onclick="navigateTo('expenses'); return false;" style="color:var(--primary-blue);font-size:0.85rem;font-weight:600;">View all →</a>
+                </div>
+                <div id="recentTransactions"></div>
+            </div>
+        </div>
+
+        <!-- WALLET -->
+        <div class="page-section" id="page-wallet">
+            <div class="page-header"><h2>Digital wallet</h2><p>Track all your money in one place.</p></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-wallet"></i></div><div class="stat-label">Current balance</div><div class="stat-value" id="walletBalance">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fas fa-arrow-up"></i></div><div class="stat-label">Money received</div><div class="stat-value" id="walletReceived" style="color:var(--primary-green);">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon red"><i class="fas fa-arrow-down"></i></div><div class="stat-label">Money spent</div><div class="stat-value" id="walletSpent" style="color:var(--error);">R0.00</div></div>
+                <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-piggy-bank"></i></div><div class="stat-label">Money saved</div><div class="stat-value" id="walletSaved">R0.00</div></div>
+            </div>
+            <button class="btn btn-primary btn-lg" onclick="openAddMoneyModal()" style="margin-bottom:24px;"><i class="fas fa-plus"></i> Add money</button>
+            <div class="card">
+                <h4 style="font-family:var(--font-primary);font-size:0.95rem;margin-bottom:12px;">Allowance splitter</h4>
+                <p style="color:var(--gray-500);font-size:0.85rem;margin-bottom:16px;">A suggested split of your R<span id="splitTotal">0</span> income.</p>
+                <div class="grid-2">
+                    <div><div class="flex-between" style="font-size:0.88rem;margin-bottom:4px;"><span>Food</span><strong id="splitFood">R0</strong></div><div style="height:4px;background:var(--gray-200);border-radius:4px;"><div style="height:100%;width:31%;background:var(--primary-blue);border-radius:4px;"></div></div></div>
+                    <div><div class="flex-between" style="font-size:0.88rem;margin-bottom:4px;"><span>Transport</span><strong id="splitTransport">R0</strong></div><div style="height:4px;background:var(--gray-200);border-radius:4px;"><div style="height:100%;width:16%;background:var(--primary-green);border-radius:4px;"></div></div></div>
+                    <div><div class="flex-between" style="font-size:0.88rem;margin-bottom:4px;"><span>Rent</span><strong id="splitRent">R0</strong></div><div style="height:4px;background:var(--gray-200);border-radius:4px;"><div style="height:100%;width:33%;background:var(--warning);border-radius:4px;"></div></div></div>
+                    <div><div class="flex-between" style="font-size:0.88rem;margin-bottom:4px;"><span>Savings</span><strong id="splitSavings">R0</strong></div><div style="height:4px;background:var(--gray-200);border-radius:4px;"><div style="height:100%;width:11%;background:var(--primary-green);border-radius:4px;"></div></div></div>
+                </div>
+            </div>
+            <div class="disclaimer"><strong>Note:</strong> This is a tracking tool, not a bank.</div>
+        </div>
+
+        <!-- EXPENSES -->
+        <div class="page-section" id="page-expenses">
+            <div class="page-header"><h2>Expense tracker</h2><p>Log and manage all your transactions.</p></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-label">Total balance</div><div class="stat-value" id="expBalance" style="font-size:1.25rem;">R0.00</div></div>
+                <div class="stat-card"><div class="stat-label">Total income</div><div class="stat-value" id="expIncome" style="font-size:1.25rem;color:var(--primary-green);">R0.00</div></div>
+                <div class="stat-card"><div class="stat-label">Total expenses</div><div class="stat-value" id="expExpense" style="font-size:1.25rem;color:var(--error);">R0.00</div></div>
+            </div>
+            <div class="form-card">
+                <div class="form-row">
+                    <input type="text" id="expText" placeholder="Description (e.g. Groceries)">
+                    <input type="number" id="expAmount" placeholder="Amount" min="0.01" step="0.01">
+                    <select id="expCategory"><option>Food</option><option>Transport</option><option>Accommodation</option><option>Data</option><option>Education</option><option>Entertainment</option><option>Shopping</option><option>Other</option></select>
+                    <select id="expType"><option value="expense">Expense</option><option value="income">Income</option></select>
+                    <button class="btn btn-primary" onclick="addExpense()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+            </div>
+            <div class="transaction-list">
+                <div class="flex-between" style="margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+                    <h4 style="font-family:var(--font-primary);font-size:0.95rem;">Transaction history</h4>
+                    <input type="text" id="expSearch" placeholder="Search..." style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:0.85rem;max-width:200px;">
+                </div>
+                <div class="tabs">
+                    <button class="active" data-filter="all" onclick="setTxFilter('all', this)">All</button>
+                    <button data-filter="income" onclick="setTxFilter('income', this)">Income</button>
+                    <button data-filter="expense" onclick="setTxFilter('expense', this)">Expenses</button>
+                </div>
+                <div id="expenseList"></div>
+            </div>
+        </div>
+
+        <!-- BUDGET -->
+        <div class="page-section" id="page-budget">
+            <div class="page-header"><h2>Budget planner</h2><p>Create and track your monthly budgets.</p></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-label">Total budget</div><div class="stat-value" id="budTotal" style="font-size:1.25rem;">R0.00</div></div>
+                <div class="stat-card"><div class="stat-label">Budget used</div><div class="stat-value" id="budUsed" style="font-size:1.25rem;color:var(--error);">R0.00</div></div>
+                <div class="stat-card"><div class="stat-label">Remaining</div><div class="stat-value" id="budRemaining" style="font-size:1.25rem;color:var(--primary-green);">R0.00</div></div>
+            </div>
+            <div class="form-card">
+                <div class="form-row two">
+                    <div><label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;">Monthly allowance (total budget)</label><input type="number" id="budMonthlyAmount" placeholder="e.g. 4500" min="0" step="0.01"></div>
+                    <div style="align-self:end;"><button class="btn btn-primary btn-block" onclick="setMonthlyBudget()"><i class="fas fa-save"></i> Set budget</button></div>
+                </div>
+            </div>
+            <div class="budget-grid" id="budgetGrid"></div>
+            <div class="form-card" style="margin-top:20px;">
+                <div class="form-row two">
+                    <input type="text" id="budCatName" placeholder="Category name (e.g. Food)">
+                    <input type="number" id="budCatAmount" placeholder="Amount" min="0" step="0.01">
+                </div>
+                <button class="btn btn-secondary" style="margin-top:12px;" onclick="addBudgetCategory()"><i class="fas fa-plus"></i> Add category budget</button>
+            </div>
+        </div>
+
+        <!-- GOALS -->
+        <div class="page-section" id="page-goals">
+            <div class="page-header"><h2>Savings goals</h2><p>Set, track, and achieve your financial goals.</p></div>
+            <div class="form-card">
+                <div class="form-row">
+                    <input type="text" id="goalName" placeholder="Goal name (e.g. Laptop)">
+                    <input type="number" id="goalTarget" placeholder="Target amount" min="0" step="0.01">
+                    <input type="date" id="goalDeadline">
+                    <select id="goalIcon"><option value="💻">Laptop</option><option value="🎓">Graduation</option><option value="🚗">Car</option><option value="🏠">Rent</option><option value="📚">Books</option><option value="💰">Emergency</option><option value="✈️">Trip</option><option value="🎯">Other</option></select>
+                    <button class="btn btn-primary" onclick="addGoal()"><i class="fas fa-plus"></i> Create</button>
+                </div>
+            </div>
+            <div class="goal-grid" id="goalsGrid"></div>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="page-section" id="page-analytics">
+            <div class="page-header"><h2>Spending analytics</h2><p>Insights based on the transactions you record.</p></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-label">Average daily spend</div><div class="stat-value" id="avgDaily" style="font-size:1.25rem;">R0.00</div></div>
+                <div class="stat-card"><div class="stat-label">Transactions recorded</div><div class="stat-value" id="txCount" style="font-size:1.25rem;">0</div></div>
+            </div>
+            <div class="chart-card" style="margin-bottom:20px;"><h4><i class="fas fa-chart-bar" style="color:var(--primary-blue);"></i> Spending by category</h4><canvas id="analyticsBarChart"></canvas></div>
+            <div class="grid-2">
+                <div class="chart-card"><h4><i class="fas fa-chart-pie" style="color:var(--primary-green);"></i> Category distribution</h4><canvas id="analyticsPieChart"></canvas></div>
+                <div class="card"><h4 style="font-family:var(--font-primary);font-size:0.95rem;margin-bottom:12px;">Spending insights</h4><div id="spendingInsights"><p style="color:var(--gray-500);font-size:0.9rem;">Add transactions to see your spending analytics.</p></div></div>
+            </div>
+        </div>
+
+        <!-- REPORTS -->
+        <div class="page-section" id="page-reports">
+            <div class="page-header"><h2>Reports</h2><p>Visual insights into your financial activity.</p></div>
+            <div class="form-card" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                <select id="reportPeriod" style="padding:9px 12px;border:1.5px solid var(--gray-200);border-radius:10px;"><option value="monthly">Monthly</option><option value="weekly">Weekly</option><option value="yearly">Yearly</option></select>
+                <button class="btn btn-secondary" onclick="generateReport('pdf')"><i class="fas fa-file-pdf"></i> PDF</button>
+                <button class="btn btn-outline" onclick="generateReport('csv')"><i class="fas fa-file-csv"></i> CSV</button>
+            </div>
+            <div class="grid-2" style="margin-top:20px;">
+                <div class="chart-card"><h4>Income vs expenses</h4><canvas id="reportBarChart"></canvas></div>
+                <div class="chart-card"><h4>Expense breakdown</h4><canvas id="reportPieChart"></canvas></div>
+                <div class="chart-card" style="grid-column:1/-1;"><h4>Balance over time</h4><canvas id="reportLineChart"></canvas></div>
+            </div>
+            <div class="card" style="margin-top:20px;">
+                <h4 style="font-family:var(--font-primary);font-size:0.95rem;margin-bottom:12px;">Financial health</h4>
+                <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+                    <div style="font-size:2.4rem;font-weight:800;color:var(--primary-green);font-family:var(--font-numbers);" id="healthScore">—</div>
+                    <div style="flex:1;min-width:200px;">
+                        <div style="height:10px;background:var(--gray-200);border-radius:10px;overflow:hidden;"><div id="healthBar" style="width:0%;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--primary-green),var(--primary-green));transition:width 1s ease;"></div></div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--gray-500);margin-top:4px;"><span>Needs improvement</span><span>Excellent</span></div>
+                    </div>
+                </div>
+                <p id="healthMessage" style="color:var(--gray-600);margin-top:10px;font-size:0.9rem;">Add some income and expenses to start analysing your financial health.</p>
+            </div>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="page-section" id="page-profile">
+            <div class="page-header"><h2>My profile</h2><p>Manage your personal information and preferences.</p></div>
+            <div class="profile-card">
+                <div class="profile-avatar-block">
+                    <div class="profile-avatar" id="profileAvatar">S</div>
+                    <div class="profile-avatar-actions">
+                        <label class="btn btn-sm btn-primary" style="cursor:pointer;"><i class="fas fa-camera"></i> Upload photo<input type="file" id="profilePicInput" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none;" onchange="handleProfilePictureUpload(event)"></label>
+                        <button class="btn btn-sm btn-outline" onclick="removeProfilePicture()"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+                <h3 id="profileName" style="text-align:center;font-family:var(--font-primary);font-size:1.15rem;margin-bottom:6px;">Student</h3>
+                <div style="text-align:center;margin-bottom:20px;"><span class="badge badge-success" id="profileStatusBadge">Active</span></div>
+                <h4 style="font-family:var(--font-primary);font-size:0.92rem;margin-bottom:12px;">Editable information</h4>
+                <div class="profile-field"><span class="label">First name</span><input class="profile-edit-input" id="editFirstName" placeholder="First name"></div>
+                <div class="profile-field"><span class="label">Last name</span><input class="profile-edit-input" id="editLastName" placeholder="Last name"></div>
+                <div class="profile-field"><span class="label">Email</span><input class="profile-edit-input" id="editEmail" type="email" placeholder="Email"></div>
+                <div class="profile-field"><span class="label">University</span><input class="profile-edit-input" id="editUniversity" placeholder="University"></div>
+                <div class="profile-field"><span class="label">Course</span><input class="profile-edit-input" id="editCourse" placeholder="Course"></div>
+                <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="saveProfileChanges()"><i class="fas fa-save"></i> Save changes</button>
+                <h4 style="font-family:var(--font-primary);font-size:0.92rem;margin:24px 0 12px;">Account details</h4>
+                <div class="profile-field"><span class="label">Student number</span><span class="value" id="profileNumber">—</span></div>
+                <div class="profile-field"><span class="label">Phone</span><span class="value" id="profilePhone">—</span></div>
+                <div class="profile-field"><span class="label">NSFAS status</span><span class="value" id="profileNsfasStatus">—</span></div>
+                <h4 style="font-family:var(--font-primary);font-size:0.92rem;margin:24px 0 12px;">Preferences</h4>
+                <div class="profile-field"><span class="label">Dark mode</span>
+                    <label style="position:relative;display:inline-block;width:44px;height:24px;"><input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" style="opacity:0;width:0;height:0;"><span id="darkModeSlider" style="position:absolute;cursor:pointer;inset:0;background:var(--gray-300);border-radius:24px;transition:0.25s;"></span></label>
+                </div>
+                <button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="if(confirm('Delete your account?')){deleteAccount();}"><i class="fas fa-trash"></i> Delete account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="chat-fab" onclick="toggleChatbot()"><i class="fas fa-comment-dots"></i></button>
+<div class="chat-panel" id="chatPanel">
+    <div class="chat-head"><h4><i class="fas fa-robot"></i> AI Financial Assistant</h4><button onclick="toggleChatbot()">&times;</button></div>
+    <div class="chat-body" id="chatMessages"><div class="chat-msg bot">Hi! I can help you understand budgeting, saving, and how to use the app.</div></div>
+    <div class="chat-input-row"><input type="text" id="chatInput" placeholder="Ask a question..." onkeypress="if(event.key==='Enter') sendChat()"><button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button></div>
+</div>
+
+<div class="modal-overlay" id="addMoneyModal">
+    <div class="modal-box">
+        <div class="modal-head"><h3><i class="fas fa-plus-circle" style="color:var(--primary-green);"></i> Add money</h3><button class="modal-close" onclick="closeModal('addMoneyModal')">&times;</button></div>
+        <div class="input-group"><label for="addMoneyAmount">Amount (R)</label><input type="number" id="addMoneyAmount" placeholder="e.g. 4500" min="0.01" step="0.01"><div class="input-error" id="addMoneyAmountError">Please enter a valid amount greater than 0.</div></div>
+        <div class="input-group"><label for="addMoneyDescription">Description (optional)</label><input type="text" id="addMoneyDescription" placeholder="e.g. March allowance"></div>
+        <div class="input-group"><label>Where did this money come from?</label>
+            <div class="source-options">
+                <label><input type="radio" name="moneySource" value="NSFAS allowance" checked><span>NSFAS allowance</span></label>
+                <label><input type="radio" name="moneySource" value="Bursary"><span>Bursary</span></label>
+                <label><input type="radio" name="moneySource" value="Salary / Part-time work"><span>Salary / Part-time</span></label>
+                <label><input type="radio" name="moneySource" value="Family"><span>Family</span></label>
+                <label style="grid-column:1/-1;"><input type="radio" name="moneySource" value="Other"><span>Other income</span></label>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-block" id="addMoneySubmitBtn" onclick="submitAddMoney()"><i class="fas fa-check"></i> Add to wallet</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="addExpenseModal">
+    <div class="modal-box">
+        <div class="modal-head"><h3><i class="fas fa-receipt" style="color:var(--error);"></i> Add expense</h3><button class="modal-close" onclick="closeModal('addExpenseModal')">&times;</button></div>
+        <div class="input-group"><label for="modalExpText">Description</label><input type="text" id="modalExpText" placeholder="e.g. Groceries"></div>
+        <div class="input-group"><label for="modalExpAmount">Amount (R)</label><input type="number" id="modalExpAmount" placeholder="e.g. 450" min="0.01" step="0.01"></div>
+        <div class="input-group"><label for="modalExpCategory">Category</label><select id="modalExpCategory"><option>Food</option><option>Transport</option><option>Accommodation</option><option>Data</option><option>Education</option><option>Entertainment</option><option>Shopping</option><option>Other</option></select></div>
+        <button class="btn btn-primary btn-block" onclick="addExpenseFromModal()"><i class="fas fa-check"></i> Add expense</button>
+    </div>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
