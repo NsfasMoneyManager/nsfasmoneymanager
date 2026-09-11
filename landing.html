@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, viewport-fit=cover">
+    <meta name="theme-color" content="#0A4DA2">
+    <title>NSFAS Money Manager — Budget, Track &amp; Save as a Student</title>
+    <meta name="description" content="A free student-finance platform for South African university students.">
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+<nav class="landing-nav" id="landingNav">
+    <div class="container">
+        <a href="#" class="brand" onclick="return false;">
+            <div class="logo-icon">
+                <img src="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg" alt="NSFAS Money Manager">
+            </div>
+            <h1>NSFAS<span>Money</span></h1>
+        </a>
+        <div class="nav-links" id="landingNavLinks">
+            <a href="#features">Features</a>
+            <a href="#community">Community</a>
+            <a href="#tips">Tips</a>
+            <a href="#team">Team</a>
+            <a href="login.html">Login</a>
+            <a href="register.html" class="btn btn-primary btn-sm">Get started</a>
+        </div>
+        <button class="hamburger" onclick="toggleLandingMenu()" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Take control of your <span>NSFAS money</span></h1>
+            <p>Budget smarter, track every rand, and build better money habits — designed for South African students. Start with R0.00 and add your real money when you're ready.</p>
+            <div class="hero-buttons">
+                <a href="register.html" class="btn btn-primary btn-lg"><i class="fas fa-rocket"></i> Get started free</a>
+                <a href="login.html" class="btn btn-outline btn-lg">Sign in</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><h3><i class="fas fa-toolbox"></i> 6+</h3><p>Financial tools</p></div>
+                <div class="stat-item"><h3><i class="fas fa-graduation-cap"></i> Built for students</h3><p>South African campuses</p></div>
+                <div class="stat-item"><h3><i class="fas fa-gift"></i> Free</h3><p>Free to start</p></div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-visual">
+                <div class="hero-img-wrap" id="heroImageContainer"></div>
+                <div class="float-card fc-1"><div class="fc-icon"><i class="fas fa-wallet"></i></div><div><div class="fc-label">Allowance</div><div class="fc-value">R4,500</div></div></div>
+                <div class="float-card fc-2"><div class="fc-icon"><i class="fas fa-piggy-bank"></i></div><div><div class="fc-label">Saved</div><div class="fc-value">R1,250</div></div></div>
+                <div class="float-card fc-3"><div class="fc-icon"><i class="fas fa-chart-pie"></i></div><div><div class="fc-label">Budget used</div><div class="fc-value">72%</div></div></div>
+                <div class="float-card fc-4"><div class="fc-icon"><i class="fas fa-bullseye"></i></div><div><div class="fc-label">Goal progress</div><div class="fc-value">68%</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt" id="features">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Everything you need to manage your money</h2>
+            <p class="section-subtitle">Purpose-built tools for NSFAS students — track, plan, and save with confidence.</p>
+        </div>
+        <div class="grid-3">
+            <div class="feature-card"><div class="feature-visual" id="featureWallet"></div><h4>Digital wallet</h4><p>Track all your money in one place and always know your real balance.</p></div>
+            <div class="feature-card green"><div class="feature-visual" id="featureBudget"></div><h4>Budget planner</h4><p>Create monthly budgets, track spending categories, and stay in control.</p></div>
+            <div class="feature-card amber"><div class="feature-visual" id="featureExpenses"></div><h4>Expense tracker</h4><p>Log every transaction and see exactly where your money goes.</p></div>
+            <div class="feature-card purple"><div class="feature-visual" id="featureSavings"></div><h4>Savings goals</h4><p>Set goals, watch the progress bar fill up, and celebrate your wins.</p></div>
+            <div class="feature-card"><div class="feature-visual" id="featureAnalytics"></div><h4>Analytics &amp; reports</h4><p>Visual insights into your spending, income, and saving habits.</p></div>
+            <div class="feature-card green"><div class="feature-visual" id="featureAI"></div><h4>AI budget coach</h4><p>Personalised guidance based on the real transactions you record.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="community">
+    <div class="container">
+        <div class="community-layout">
+            <div class="community-text">
+                <h2>Join a community of students managing money better.</h2>
+                <p>You're not alone in figuring out NSFAS. Connect, share saving tips, and learn from other students on the same journey.</p>
+                <ul class="community-points">
+                    <li><i class="fas fa-check"></i> Share money tips with fellow students</li>
+                    <li><i class="fas fa-check"></i> Ask questions about budgeting and saving</li>
+                    <li><i class="fas fa-check"></i> Learn from real student experiences</li>
+                    <li><i class="fas fa-check"></i> Support each other through the academic year</li>
+                </ul>
+            </div>
+            <div class="community-image" id="communityImageContainer"></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">How students use it</h2>
+            <p class="section-subtitle">Example scenarios — not real customer testimonials.</p>
+        </div>
+        <div class="grid-3">
+            <div class="testimonial-card">
+                <span class="badge badge-example example-tag">Example</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"A student could log every purchase during the month, then see exactly how much went to food, transport, and data."</p>
+                <div class="author"><div class="avatar">EX</div><div><div class="name">Example scenario</div><div class="role">Typical student use</div></div></div>
+            </div>
+            <div class="testimonial-card">
+                <span class="badge badge-example example-tag">Example</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"A student could set a savings goal for a laptop, then watch the progress bar fill up as they add to savings each month."</p>
+                <div class="author"><div class="avatar">EX</div><div><div class="name">Example scenario</div><div class="role">Typical student use</div></div></div>
+            </div>
+            <div class="testimonial-card">
+                <span class="badge badge-example example-tag">Example</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"A student could use the budget planner to divide their NSFAS allowance across food, rent, transport, and savings."</p>
+                <div class="author"><div class="avatar">EX</div><div><div class="name">Example scenario</div><div class="role">Typical student use</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="tips">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Financial tips for students</h2>
+            <p class="section-subtitle">Practical, honest money advice you can apply today.</p>
+        </div>
+        <div class="grid-3">
+            <div class="tip-card"><div class="tip-visual" id="tipSaving"></div><h4>50/30/20 rule</h4><p>Spend 50% on needs, 30% on wants, and save 20% of your allowance every month.</p></div>
+            <div class="tip-card green"><div class="tip-visual" id="tipBudgeting"></div><h4>Track every cent</h4><p>Log every purchase. Small expenses add up faster than you think.</p></div>
+            <div class="tip-card amber"><div class="tip-visual" id="tipGroceries"></div><h4>Smart groceries</h4><p>Plan meals, buy in bulk where possible, and avoid shopping while hungry.</p></div>
+            <div class="tip-card"><div class="tip-visual" id="tipTransport"></div><h4>Transport savings</h4><p>Look into student travel cards and share rides where it's safe and practical.</p></div>
+            <div class="tip-card purple"><div class="tip-visual" id="tipDiscounts"></div><h4>Student discounts</h4><p>Always ask for student discounts. Save up to 20% on books, transport, and entertainment.</p></div>
+            <div class="tip-card green"><div class="tip-visual" id="tipEmergency"></div><h4>Emergency fund</h4><p>Aim to save 3-6 months of expenses for unexpected situations. Start small.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt" id="team">
+    <div class="container">
+        <div class="section-header"><h2 class="section-title">Meet the team</h2><p class="section-subtitle">The people behind NSFAS Money Manager.</p></div>
+        <div class="team-grid">
+            <div class="team-card"><div class="team-photo"><div class="avatar-frame"><img src="https://i.postimg.cc/6QQQXJvH/IMG-20260512-WA0043.jpg" alt="Vicent Mulisa Motau" loading="lazy"></div></div><div class="team-info"><h4>Vicent Mulisa Motau</h4><span class="team-role">Founder &amp; CEO</span><p>Passionate about financial literacy for students.</p></div></div>
+            <div class="team-card"><div class="team-photo"><div class="avatar-frame"><img src="https://i.postimg.cc/XJcdz0SH/IMG-20260512-WA0034.jpg" alt="Rudolph Shongwe" loading="lazy"></div></div><div class="team-info"><h4>Rudolph Shongwe</h4><span class="team-role">Co-Founder</span><p>Building smart solutions for student success.</p></div></div>
+            <div class="team-card"><div class="team-photo"><div class="avatar-frame"><img src="https://i.postimg.cc/CKJwPvrs/IMG-20260512-WA0040.jpg" alt="Edward Tabane Sechabe" loading="lazy"></div></div><div class="team-info"><h4>Edward Tabane Sechabe</h4><span class="team-role">Co-Founder</span><p>Creating intuitive and beautiful experiences.</p></div></div>
+            <div class="team-card"><div class="team-photo"><div class="avatar-frame"><img src="https://i.postimg.cc/SxdvMHvM/IMG-20251126-WA0040(1).jpg" alt="Jaden" loading="lazy"></div></div><div class="team-info"><h4>Jaden</h4><span class="team-role">Co-Founder</span><p>Helping students make smart money decisions.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Start managing your money today</h2>
+        <p>Free to start — your account begins at R0.00 and grows with the real money you add.</p>
+        <a href="register.html" class="btn btn-white btn-lg"><i class="fas fa-rocket"></i> Create free account</a>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand"><div class="logo-icon"><img src="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg" alt="NSFAS Money Manager"></div><h4>NSFAS Money Manager</h4></div>
+                <p style="color:rgba(255,255,255,0.55);font-size:0.86rem;max-width:320px;">Empowering South African students to take control of their financial future.</p>
+                <div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+            </div>
+            <div><h4>Product</h4><a href="register.html">Create account</a><a href="login.html">Sign in</a><a href="#features">Features</a><a href="#tips">Money tips</a></div>
+            <div><h4>Support</h4><a href="mailto:info@nsfasmoney.co.za">Contact us</a><a href="#">Help centre</a><a href="#">Privacy policy</a><a href="#">Terms of service</a></div>
+            <div><h4>Contact</h4><p style="color:rgba(255,255,255,0.65);font-size:0.86rem;"><i class="fas fa-envelope" style="margin-right:6px;"></i><a href="mailto:info@nsfasmoney.co.za" style="color:inherit;display:inline;">info@nsfasmoney.co.za</a></p></div>
+        </div>
+        <div class="footer-bottom"><span>&copy; 2026 NSFAS Money Manager. All rights reserved.</span><span style="max-width:520px;font-size:0.75rem;">NSFAS Money Manager is a budgeting and expense-tracking tool. It is not a bank.</span></div>
+    </div>
+</footer>
+
+<script src="landing.js"></script>
+</body>
+</html>
