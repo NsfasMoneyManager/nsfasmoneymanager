@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <meta name="theme-color" content="#0A4DA2">
+    <title>Sign in — NSFAS Money Manager</title>
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="auth-page">
+    <div class="auth-layout">
+        <div class="auth-illustration">
+            <h2>Manage your <span>NSFAS money</span> with confidence.</h2>
+            <p>Track your allowance, plan your budget, and save towards the things that matter — all in one place, built for South African students.</p>
+            <ul class="auth-feature-list">
+                <li><i class="fas fa-check"></i> Track allowance, income &amp; expenses</li>
+                <li><i class="fas fa-check"></i> Set budgets and savings goals</li>
+                <li><i class="fas fa-check"></i> See exactly where your money goes</li>
+            </ul>
+            <div class="auth-image" id="loginImageContainer" aria-hidden="true"></div>
+        </div>
+
+        <div class="auth-box">
+            <div class="auth-logo">
+                <div class="logo-icon"><img src="https://i.postimg.cc/5N9Tp4dr/IMG-20260512-WA0002.jpg" alt="NSFAS Money Manager"></div>
+                <h1>NSFAS Money Manager</h1>
+                <p>Smart student finance</p>
+            </div>
+            <h2>Welcome back</h2>
+            <p class="auth-subtitle">Sign in to manage your finances</p>
+
+            <div class="msg msg-error" id="loginError" role="alert"></div>
+
+            <form id="loginForm" novalidate>
+                <div class="input-group">
+                    <label for="loginIdentifier">Student number or email</label>
+                    <input type="text" id="loginIdentifier" placeholder="e.g. 203067667" required autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <div class="auth-options">
+                    <label><input type="checkbox" id="rememberMe"> Remember me</label>
+                    <a href="#" id="forgotLink">Forgot password?</a>
+                </div>
+                <button type="submit" class="auth-btn" id="loginSubmitBtn">
+                    <i class="fas fa-sign-in-alt"></i> Sign in
+                </button>
+            </form>
+
+            <div class="auth-switch">
+                Don't have an account? <a href="register.html">Create account</a>
+            </div>
+            <div class="auth-trust">
+                <i class="fas fa-lock"></i> Your data stays on your device.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
